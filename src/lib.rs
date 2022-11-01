@@ -2,8 +2,8 @@ use std::ops::Add;
 use bitcoin::Script;
 use std::str::FromStr;
 use bitcoin::util::address::Address as InternalAddress;
+use bitcoin::network::constants::Network;
 use bitcoin::util::address::AddressType;
-use bitcoin::network::constants::Network as InternalNetwork;
 
 const ALL_PARSERS: &'static [&'static dyn CanParse] = &[&Address::PARSER];
 
@@ -35,26 +35,8 @@ impl Address {
     fn wrap(address: InternalAddress) -> Address{
         Address {
             address_type: address.address_type().unwrap(),
-            network: Network::wrap(address.network),
+            network: address.network,
             raw: address.to_string()
-        }
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub enum Network {
-    Mainnet,
-    Testnet,
-    // todo
-    Unknown,
-}
-
-impl Network {
-    fn wrap(network: InternalNetwork) -> Network{
-        match network {
-            InternalNetwork::Bitcoin => Network::Mainnet,
-            InternalNetwork::Testnet => Network::Testnet,
-            _ => Network::Unknown
         }
     }
 }
@@ -113,7 +95,7 @@ mod tests {
 
         assert_eq!(parsed.raw, address);
         assert_eq!(parsed.address_type, AddressType::P2sh);
-        assert_eq!(parsed.network, Network::Mainnet);
+        assert_eq!(parsed.network, Network::Bitcoin);
     }
 
     #[test]
@@ -124,6 +106,6 @@ mod tests {
 
         assert_eq!(parsed.raw, address);
         assert_eq!(parsed.address_type, AddressType::P2sh);
-        assert_eq!(parsed.network, Network::Mainnet);
+        assert_eq!(parsed.network, Network::Bitcoin);
     }
 }
