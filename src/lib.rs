@@ -2,7 +2,7 @@ use std::ops::Add;
 use bitcoin::Script;
 use std::str::FromStr;
 use bitcoin::util::address::Address as InternalAddress;
-use bitcoin::util::address::AddressType as InternalAddressType;
+use bitcoin::util::address::AddressType;
 use bitcoin::network::constants::Network as InternalNetwork;
 
 const ALL_PARSERS: &'static [&'static dyn CanParse] = &[&Address::PARSER];
@@ -34,7 +34,7 @@ impl Address {
 
     fn wrap(address: InternalAddress) -> Address{
         Address {
-            address_type: AddressType::wrap(address.address_type().unwrap()),
+            address_type: address.address_type().unwrap(),
             network: Network::wrap(address.network),
             raw: address.to_string()
         }
@@ -55,29 +55,6 @@ impl Network {
             InternalNetwork::Bitcoin => Network::Mainnet,
             InternalNetwork::Testnet => Network::Testnet,
             _ => Network::Unknown
-        }
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub enum AddressType {
-    P2PK,
-    P2SH,
-    P2WPKH,
-    P2WSH,
-    P2TR,
-    Unknown
-}
-
-impl AddressType {
-    fn wrap(address_type: InternalAddressType) -> AddressType {
-        match address_type {
-            InternalAddressType::P2pkh => AddressType::P2PK,
-            InternalAddressType::P2sh => AddressType::P2SH,
-            InternalAddressType::P2wpkh => AddressType::P2WPKH,
-            InternalAddressType::P2wsh => AddressType::P2WSH,
-            InternalAddressType::P2tr => AddressType::P2TR,
-            _ => AddressType::Unknown
         }
     }
 }
@@ -135,7 +112,7 @@ mod tests {
         let parsed = Address::PARSER.parse(&address.to_string()).unwrap();
 
         assert_eq!(parsed.raw, address);
-        assert_eq!(parsed.address_type, AddressType::P2SH);
+        assert_eq!(parsed.address_type, AddressType::P2sh);
         assert_eq!(parsed.network, Network::Mainnet);
     }
 
@@ -146,7 +123,7 @@ mod tests {
         let parsed = parse(&address.to_string(), &Address::PARSER).unwrap();
 
         assert_eq!(parsed.raw, address);
-        assert_eq!(parsed.address_type, AddressType::P2SH);
+        assert_eq!(parsed.address_type, AddressType::P2sh);
         assert_eq!(parsed.network, Network::Mainnet);
     }
 }
