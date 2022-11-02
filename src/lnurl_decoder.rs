@@ -2,7 +2,7 @@ use bech32::{self, FromBase32};
 use std::{str};
 
 fn decode(input: &str) -> String {
-    let (hrp, data) = bech32::decode(&input).unwrap();
+    let (_raw_hrp, data) = bech32::decode(input).unwrap();
     let base32_data = Vec::<u8>::from_base32(&data);
     return String::from_utf8(base32_data.unwrap()).unwrap();
 } 
