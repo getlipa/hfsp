@@ -12,8 +12,8 @@ impl TopLevelDomain {
     const ONION: & 'static str = ".onion";
 }
 
-pub fn validate_ln_url(url: &str) -> bool {
-    return url.contains("lnurl");
+pub fn is_ln_url(url: &str) -> bool {
+    return url.contains("lnurl") || url.contains("LNURL");
 }
 
 pub fn get_network_type(ln_url: &str) -> Network {
