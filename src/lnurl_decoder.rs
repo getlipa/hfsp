@@ -1,11 +1,40 @@
 use bech32::{self, FromBase32};
 use std::{str};
+use reqwest::{blocking};
+use crate::lnurl_validator::{Network, is_all_chars_same_case, validate_ln_url, get_network_type};
+
 
 fn decode(input: &str) -> String {
-    let (_raw_hrp, data) = bech32::decode(input).unwrap();
-    let base32_data = Vec::<u8>::from_base32(&data);
-    return String::from_utf8(base32_data.unwrap()).unwrap();
-} 
+    if validate_ln_url(input) {
+        if is_all_chars_same_case(input) {
+            let (_, data, _) = bech32::decode(input).unwrap();
+            let base32_data = Vec::<u8>::from_base32(&data);
+            let url = String::from_utf8(base32_data.unwrap()).unwrap();
+
+            if get_network_type(&url) != Network::Invalid {
+                // TODO
+                // If the query paramerts have "tag" then the url should be ınterpreded as a callback url
+                // else GET url and JSON expected
+                let json = fetch_json(&url);
+                println!("POP: {}", json);
+                return json;
+            }
+
+            return "a".to_string();
+        }
+
+        return "a".to_string();
+    }
+
+    return "a".to_string();
+}
+
+fn fetch_json(url: &str) -> String {
+    // TODO Make sure ignore http code.
+    println!("URL: {}", url);
+    let response = blocking::get(url);
+    return response.unwrap().text().unwrap();
+}
 
 #[cfg(test)]
 mod test {
