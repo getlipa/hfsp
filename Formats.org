@@ -1,10 +1,12 @@
 * On-Chain
 
 ** Addresses
+
+*** Legacy
 - P2PKH
 - P2SH
 
-*** Bench32 and Bench32m
+*** Bech32 and Bech32m
 Spec: [[https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki][BIP-173]]
 
 [[https://en.bitcoin.it/wiki/Bech32][On bitcoin wiki]]
