@@ -1,0 +1,71 @@
+* On-Chain
+
+** Addresses
+- P2PKH
+- P2SH
+
+*** Bench32 and Bench32m
+Spec: [[https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki][BIP-173]]
+
+[[https://en.bitcoin.it/wiki/Bech32][On bitcoin wiki]]
+
+- P2WPKH SegWit
+- P2WSH
+- P2TR Taproot
+
+** BIP-72 (and BIP-21) URI Scheme
+
+* Lightning
+
+** BOLT-11 Invoice
+Example: ~lnbc20m1pvjluezsp5zyg3zyg3zyg3zyg3zyg3zyg3zyg3zyg3zyg3zyg3zyg3zyg3zygshp58yjmdan79s6qqdhdzgynm4zwqd5d7xmw5fk98klysy043l2ahrqspp5qqqsyqcyq5rqwzqfqqqsyqcyq5rqwzqfqqqsyqcyq5rqwzqfqypqfp4qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q9qrsgq9vlvyj8cqvq6ggvpwd53jncp9nwc47xlrsnenq2zp70fq83qlgesn4u3uyf4tesfkkwwfg3qs54qe426hp3tz7z6sweqdjg05axsrjqp9yrrwc~
+|-------------+------------------------------------------------------|
+| Description | Invoice protocol for lightning payments              |
+| Spec        | [[https://github.com/lightning/bolts/blob/master/11-payment-encoding.md][BOLT-11]]                                              |
+| Status      | Final                                                |
+| Regex       | ~(lightning:)?ln[qpzry9x8gf2tvdw0s3jn54khce6mua7l]+~ |
+|-------------+------------------------------------------------------|
+
+** BOLT-12 Offer
+Example: ~lno1pqqnyzsmx5cx6umpwssx6atvw35j6ut4v9h8g6t50ysx7enxv4epgrmjw4ehgcm0wfczucm0d5hxzagkqyq3ugztng063cqx783exlm97ekyprnd4rsu5u5w5sez9fecrhcuc3ykqhcypjju7unu05vav8yvhn27lztf46k9gqlga8uvu4uq62kpuywnu6me8srgh2q7puczukr8arectaapfl5d4rd6uc7st7tnqf0ttx39n40s~
+|-------------+-------------------------------------------|
+| Description | Flexible protocol for lightning payments  |
+| Spec        | [[https://github.com/lightning/bolts/pull/798][BOLT-12]]                                   |
+| Status      | Draft                                     |
+| Resources   | https://bolt12.org                        |
+| Regex       | ~lno1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]+~ |
+|-------------+-------------------------------------------|
+
+** LNURL
+*** Pay
+*** Withdraw
+*** Auth
+*** LNURL Without Bech32
+https://github.com/lnurl/luds/blob/luds/17.md
+|-------------+----------------------------------------------------|
+| Description | Protocol schemes and raw (non bech32-encoded) URLs |
+| Spec        | [[https://github.com/lnurl/luds/blob/luds/17.md][LUD-17]]                                             |
+| Status      | Draft                                              |
+| Regex       |                                                    |
+|-------------+----------------------------------------------------|
+
+
+- ~lnurlc://~ for LNURL-channel, i.e. ~channelRequest~
+- ~lnurlw://~ for LNURL-withdraw, i.e. ~withdrawRequest~
+- ~lnurlp://~ for LNURL-pay, i.e. ~payRequest~
+- ~keyauth://~ for LNURL-auth, i.e. ~login~
+
+*** LN Address
+Example: ~username@example.com~
+|-------------+---------------------------------------|
+| Description | Paying to static internet identifiers |
+| Spec        | [[https://github.com/lnurl/luds/blob/luds/16.md][LUD-16]]                                |
+| Status      | Final?                                |
+| Regex       | ~[a-z0-9_.-]+@[a-zA-Z0-9.-]+~         |
+|-------------+---------------------------------------|
+Internet Identifier (like email address, but stricter rules for local part (before ~@~)).
+Basically expands into ~https://<domain>/.well-known/lnurlp/<username>~.
+
+* Other
+
+** Xpub/Xpriv

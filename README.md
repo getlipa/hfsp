@@ -17,12 +17,12 @@ Bitcoin applications should give helpful feedback to the users.
 
 ## What
 
-The aim of this project is to craft **a well structured list of different address
-formats** (on-chain, ln invoice, lnurl, …).
+The aim of this project is to craft [**a well structured list of
+different address formats**](Formats.org) (on-chain, ln invoice, lnurl, …).
 Such that wallets implementations can uses it and give wallets' users helpful
 hints when scanning QR code or pasting address/request.
 
-## Rust Library
+### Rust Library
 
 A rust library which implements parsing and validation.
 Bitcoin applications developers can easily start using the library and improve
