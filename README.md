@@ -1,8 +1,8 @@
 # HFSP — Human Friendly String Parser
-/Use Human Friendly String Parser or Have Fun Staying Poor!/
+
+_Use Human Friendly String Parser or Have Fun Staying Poor!_
 
 ## Why
-Bitcoin eco-system becomes complex and nowadays users of bitcoin/LN wallets 
 
 For **global bitcoin/LN adoption** we need to make use of bitcoin applications
 easy for non-technical people.
@@ -13,6 +13,7 @@ application does not directly support what the user is about to do.
 
 ## How
 
+Bitcoin applications should give helpful feedback to the users.
 
 ## What
 
@@ -21,7 +22,7 @@ formats** (on-chain, ln invoice, lnurl, …).
 Such that wallets implementations can uses it and give wallets' users helpful
 hints when scanning QR code or pasting address/request.
 
-# HFSP-lib
+## Rust Library
 
 A rust library which implements parsing and validation.
 Bitcoin applications developers can easily start using the library and improve
