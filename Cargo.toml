@@ -5,3 +5,6 @@ edition = "2021"
 
 [dependencies]
 bech32 = "0.7.3"
+email-address-parser = "1.0.3"
+lightning-invoice = "0.20.0"
+regex = "1.6.0"
