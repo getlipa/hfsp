@@ -16,6 +16,7 @@ Spec: [[https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki][BIP-173]
 - P2TR Taproot
 
 ** BIP-72 (and BIP-21) URI Scheme
+- BOLT-11 allows fallback to BIP-21 with the key 'lightning' and the value equal to the BOLT-11 encoding
 
 * Lightning
 
@@ -38,7 +39,34 @@ Example: ~lno1pqqnyzsmx5cx6umpwssx6atvw35j6ut4v9h8g6t50ysx7enxv4epgrmjw4ehgcm0wf
 | Regex       | ~lno1[qpzry9x8gf2tvdw0s3jn54khce6mua7l]+~ |
 |-------------+-------------------------------------------|
 
+A protocol upgrade
+
+*** Pros and Cons
+**** Pros
+- LN native
+- static
+- better proof of payment (for payer)
+- better privacy for payee
+- partly solves Stuck payments problem
+- does not need a web server, domain
+- allows specify amounts in other currencies
+
+**** Cons
+- needs a LN protocol upgrade
+- unsolved spam & DoS problem
+
 ** LNURL
+
+*** Pros and Cons
+**** Pros
+- static
+- sort
+- already works (no need for LN protocol upgrade)
+
+**** Cons
+- needs a web server, domain name, certificate (not self-signed)
+- bad privacy for sender and receiver (if not using Tor)
+
 *** Pay
 *** Withdraw
 *** Auth
@@ -50,7 +78,6 @@ https://github.com/lnurl/luds/blob/luds/17.md
 | Status      | Draft                                              |
 | Regex       |                                                    |
 |-------------+----------------------------------------------------|
-
 
 - ~lnurlc://~ for LNURL-channel, i.e. ~channelRequest~
 - ~lnurlw://~ for LNURL-withdraw, i.e. ~withdrawRequest~
